@@ -29,6 +29,8 @@ xlabel('$s=r$','Interpreter','latex')
 ylabel('Relative Frobenius norm error','Interpreter','latex')
 title_text = append('$k = $',num2str(k));
 title(title_text,'interpreter','latex')
+curtick = get(gca, 'xTick');
+xticks(unique(round(curtick)));
 set(gca,'Fontsize',16)
 hold off
 
