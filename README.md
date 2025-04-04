@@ -13,4 +13,5 @@ low-rank approximation of matrix functions", arXiv preprint	arXiv:2502.01888, (2
 
 ### Citation
 If you use this repository, please cite it as:
+
 [![DOI](https://zenodo.org/badge/719962317.svg)](https://doi.org/10.5281/zenodo.15149091)
