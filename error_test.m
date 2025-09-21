@@ -1,3 +1,5 @@
+% Run experiments to produce the results for Section 5.2
+
 clc
 clear
 rng(0)
@@ -117,9 +119,6 @@ for matrix = 1:4
     krylov_aware_untruncated = zeros(1,length(s_list));
     krylov_aware_truncated = zeros(1,length(s_list));
     randSVD_truncated = zeros(1,length(s_list));
-    %exactrandSVD_truncated = zeros(1,length(s_list));
-    %power_iteration_truncated = zeros(1,length(s_list));
-    %q_optimal = zeros(1,length(s_list));
     
     % Check that there is a 1-to-1 correspondence between r_list and s_list
     if length(s_list)~=length(r_list)
@@ -137,6 +136,8 @@ for matrix = 1:4
     
     
     for i = 1:length(s_list)
+
+        fprintf('%i / %i \n',i,length(s_list))
         
         % Number of iterations
         s = s_list(i);
@@ -154,20 +155,11 @@ for matrix = 1:4
         [U,S] = randSVD(fAfun,Omega);
         k_ = size(U,2);
         k__ = min(k,k_);
-        %randSVD_untruncated(j) = norm(fA - U*S*U','fro');
         randSVD_truncated(i) = norm(fA - U(:,1:k__)*S(1:k__,1:k__)*U(:,1:k__)','fro')/normfA;
-        
-        % % Subspace iteration with optimal q
-        %opterr = randSVD_truncated(j);
-        %qopt = 1;
-        %for q = 2:qmax
-            
-        %    err = 
-            
-        %end
         
     end
     
+    filename = append(filename,'_p=',num2str(p));
     save(filename,'s_list','r_list','optimal','krylov_aware_untruncated',...
         'krylov_aware_truncated','randSVD_truncated','exactrandSVD_truncated','k')
     
