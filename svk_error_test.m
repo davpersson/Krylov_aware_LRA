@@ -14,7 +14,7 @@ constant = 'basis'; % The single vector method produces a basis that has the sam
 %constant = 'quadratic_form'; % The single vector method produces a basis that has a larger dimension than the block method. No extra effort spent on approximating quadratic form.
 
 tic
-for matrix = 2:3
+for matrix = 1:4
     
     matrix
     
