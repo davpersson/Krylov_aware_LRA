@@ -1,6 +1,6 @@
 function L = uq_laplaceeig(kappa,lambda)
 
-%Function to create A_pde
+%Code for creating a test matrix
 
 N = 100;
 

@@ -1,4 +1,5 @@
 function d = tfim_eigs(n,h)
+% Code for creating a test matrix
 % This code is taken from https://github.com/eepperly/XTrace
 if mod(n,2) ~= 0
     error('Not implemented for n odd')

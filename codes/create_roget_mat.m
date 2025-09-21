@@ -1,4 +1,5 @@
 function A = create_roget_mat()
+% Code to create a test matrix
 %based on https://www.mathworks.com/matlabcentral/answers/169557-read-a-text-file-with-varying-number-of-colums
 
 %Save rows in a cell

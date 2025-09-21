@@ -1,5 +1,7 @@
 function [Q1,T,R0,varargout] = block_lanczos(Afun,Z,s,r,varargin)
 
+% Code for the block Lanczos method
+
 if nargin == 5 && varargin{1} == true
     
     orthogonality_loss = zeros(1,s);
@@ -73,16 +75,18 @@ for k = 0:q-1
     
     % Double reorthgonalization
     if k > 0
-        
+
         Z = Z - Q(:,1:(k*b))*(Q(:,1:(k*b))'*Z);
-        
+
     end
     
     % Obtain next block
     [Qkp1,R,P] = qr(Z,0);
     
     % Check if rank deficient
-    if min(abs(diag(R))) <= (1e-12)*max(abs(diag(R)))
+    if min(abs(diag(R))) <= (1e-10)*max(abs(diag(R)))
+
+        warning('Rank deficient block detected')
         
         % New block size
         b = max(find(abs(diag(R)) > (1e-10)*max(abs(diag(R)))));
@@ -97,7 +101,7 @@ for k = 0:q-1
     invP = zeros(1,length(P));
     invP(P) = 1:length(P);
     R = R(:,invP);
-    if nargin == 5 && varargin{1} == true && k <= s-1
+    if nargin == 5 && varargin{1} == true
         
         orthogonality_loss(k+1) = norm(Q'*Q-eye(size(Q,2)),'fro');
         Ek = eye(size(Q,2)); 
@@ -105,7 +109,6 @@ for k = 0:q-1
         three_term_rr_loss(k+1) = norm(Afun(Q) - Q*T-Qkp1*R*Ek');
         
     end
-        
         
     Q = [Q Qkp1];
     

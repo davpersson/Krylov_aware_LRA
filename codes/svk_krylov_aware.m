@@ -1,14 +1,13 @@
-function [U,S] = krylov_aware(Afun,f,Omega,s,r,varargin)
-
-% Code for Krylov aware low rank approximation
-
-l = size(Omega,2);
+function [U,S] = svk_krylov_aware(Afun,f,omega,s,r,varargin)
+% Code for single vector Krylov aware low rank approximation
 
 %Orthogonalize sketch
-Omega = orth(Omega);
+omega = omega/norm(omega);
 
-%Run block Lanczos
-[Q1,T] = block_lanczos(Afun,Omega,s,r);
+%Run Lanczos
+%[Q1,T] = lanczos(Afun,omega,s,r);
+A = Afun(sparse(eye(size(omega,1))));
+[Q1,T] = lanczos_through_rktoolbox(A,omega,s,r);
 
 T = (T + T')/2;
 

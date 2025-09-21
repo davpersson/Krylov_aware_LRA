@@ -1,6 +1,6 @@
 function [U,D] = randSVD(Afun,Omega,varargin)
-
 % Randomized SVD
+
 Q = orth(Afun(Omega));
 
 [U,D] = eig(Q'*Afun(Q));
