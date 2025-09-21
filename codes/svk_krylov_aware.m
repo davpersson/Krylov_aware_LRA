@@ -5,9 +5,7 @@ function [U,S] = svk_krylov_aware(Afun,f,omega,s,r,varargin)
 omega = omega/norm(omega);
 
 %Run Lanczos
-%[Q1,T] = lanczos(Afun,omega,s,r);
-A = Afun(sparse(eye(size(omega,1))));
-[Q1,T] = lanczos_through_rktoolbox(A,omega,s,r);
+[Q1,T] = lanczos(Afun,omega,s,r);
 
 T = (T + T')/2;
 
